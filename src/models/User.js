@@ -1,0 +1,24 @@
+import { Schema, model } from "mongoose";
+
+let UserSchema = new Schema(
+  {
+    username: String,
+    email: { type: String, required: true, unique: true },
+    password: String,
+    role: String,
+    classroom: {type: Schema.Types.ObjectId, ref:"Classroom"},
+    status: String,
+    createdBy: { type: Schema.Types.ObjectId, ref: "User" },
+  },
+  {
+    timestamps: true,
+    toJSON: {
+      transform(doc, ret) {
+        delete ret.password;
+        delete ret.__v;
+      },
+    },
+  }
+);
+
+export default model("User", UserSchema);

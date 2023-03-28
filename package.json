@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
+    "express-jwt": "^8.4.1",
+    "express-session": "^1.17.3",
+    "helmet": "^6.0.1",
+    "mongodb": "^5.1.0",
+    "mongoose": "^6.7.3",
+    "nodejs": "^0.0.0",
+    "nodemon": "^2.0.22"
+  },
+  "name": "gorrywell",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -r esm ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mchaelphen/gorrywell-be-test.git"
+  },
+  "author": "Michael Phen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mchaelphen/gorrywell-be-test/issues"
+  },
+  "homepage": "https://github.com/mchaelphen/gorrywell-be-test#readme",
+  "description": ""
+}
