@@ -2,7 +2,8 @@ import { Schema, model } from "mongoose";
 
 let ClassroomSchema = new Schema(
   {
-    name: String,
+    name: {type: String, required: true, unique: true},
+    mentor: {type: Schema.Types.ObjectId, ref:"User", required: true},
     createdBy: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {

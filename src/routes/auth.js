@@ -1,27 +1,13 @@
-var jwt = require('express-jwt');
-var secret = require('../src/config').secret;
+import { Router } from "express";
+import AuthController from "../controllers/AuthController";
+// import { checkJwt } from "../middlewares";
 
-function getTokenFromHeader(req){
-  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Token' ||
-      req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-    return req.headers.authorization.split(' ')[1];
-  }
+const router = Router();
+//Login route
+// router.get("/check-user", [checkJwt], AuthController.checkUser);
+router.post("/sign-up", AuthController.signUp);
+// router.post("/sign-in", AuthController.signIn);
+// router.post("/forget-password", AuthController.forgetPassword);
+// router.post("/reset-password", AuthController.resetPassword);
 
-  return null;
-}
-
-var auth = {
-  required: jwt({
-    secret: secret,
-    userProperty: 'payload',
-    getToken: getTokenFromHeader
-  }),
-  optional: jwt({
-    secret: secret,
-    userProperty: 'payload',
-    credentialsRequired: false,
-    getToken: getTokenFromHeader
-  })
-};
-
-module.exports = auth;
+export default router;
