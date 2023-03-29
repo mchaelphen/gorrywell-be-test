@@ -34,6 +34,24 @@ class ClassroomController {
     }
   };
 
+  static updateExercise = async (req, res) => {
+    const { id } = req.params;
+    const { exercise } = req.body;
+    try {
+      const classroom = await Classroom.findOneAndUpdate(
+        { _id: id },
+        { exercise }
+      ).exec();
+      res.status(200).send(classroom);
+    } catch (error) {
+      res.status(400).send({
+        error: true,
+        errorList: ["cannot get " + error],
+        data: null,
+      });
+    }
+  };
+
 }
 
 export default ClassroomController;
