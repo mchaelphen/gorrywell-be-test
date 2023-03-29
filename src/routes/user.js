@@ -6,6 +6,7 @@ const router = Router();
 
 // router.get("/approve/:id", [checkJwt], UserController.approve);
 router.get("/", UserController.getAll);
+router.get("/get-mentee/:id", UserController.getMentee);
 // router.get("/:id", [checkJwt], UserController.getOneById);
 
 export default router;
