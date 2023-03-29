@@ -65,6 +65,22 @@ class UserController {
     }
   };
 
+  static getLeaderboardByClassroom = async (req, res) => {
+    const { id } = req.params;
+    let sort = {};
+    try {
+      sort.score = "descending";
+      const user = await User.find({ classroom: id }).sort( sort ).exec();
+      res.status(200).send(user);
+    } catch (error) {
+      res.status(400).send({
+        error: true,
+        errorList: ["cannot get " + error],
+        data: null,
+      });
+    }
+  }
+
 }
 
 export default UserController;
