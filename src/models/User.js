@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { model, Schema } from "mongoose";
 
 let UserSchema = new Schema(
   {
@@ -7,6 +7,7 @@ let UserSchema = new Schema(
     password: String,
     role: String,
     classroom: {type: Schema.Types.ObjectId, ref:"Classroom"},
+    score: Number,
     status: String,
     createdBy: { type: Schema.Types.ObjectId, ref: "User" },
   },

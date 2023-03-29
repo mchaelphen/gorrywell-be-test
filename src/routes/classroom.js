@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ClassroomController } from "../controllers";
-// import { checkJwt } from "../middlewares";
+import { checkJwt, isMentor } from "../middlewares/checkJwt";
 
 const router = Router();
 
@@ -8,5 +8,5 @@ const router = Router();
 router.get("/", ClassroomController.getAll);
 // router.get("/:id", [checkJwt], UserController.getOneById);
 
-router.post("/", ClassroomController.create);
+router.post("/", [checkJwt], [isMentor], ClassroomController.create);
 export default router;
