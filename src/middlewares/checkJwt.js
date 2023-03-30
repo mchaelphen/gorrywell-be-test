@@ -5,9 +5,9 @@ export const checkJwt = async (req, res, next) => {
   //Get the jwt token from the head
   const bearerToken = req.headers.authorization;
   let token = "";
+  
   if (bearerToken) token = bearerToken.split(" ")[1];
   let jwtPayload;
-
   //Try to validate the token and get data
   try {
     jwtPayload = jwt.verify(token, process.env.JWT_SECRET);
@@ -24,7 +24,6 @@ export const checkJwt = async (req, res, next) => {
     });
     return;
   }
-
   //The token is valid for 1 hour
   //We want to send a new token on every request
   const { userId, email, role } = jwtPayload;
@@ -34,7 +33,6 @@ export const checkJwt = async (req, res, next) => {
     // { expiresIn: "30d" }
   );
   res.setHeader("token", newToken);
-
   //Call the next middleware or controller
   next();
 };
@@ -53,9 +51,34 @@ export const isMentor = async (req, res, next) => {
       });
       return;
     }
-    
   } catch (error) {
-    //If role is not valid, respond with 401 (unauthorized)
+    res.status(400).send({
+      error: true,
+      errorList: ["something went wrong"],
+      data: null,
+    });
+    return;
+  }
+};
+
+export const isMentorOrMentee = async (req, res, next) => {
+  //Try to check role is a mentor or not
+  try {
+    if (
+      res.locals.userData.role == "mentor" ||
+      res.locals.userData.role == "mentee"
+    ) {
+      next();
+    } else {
+      //If role is not valid, respond with 401 (unauthorized)
+      res.status(401).send({
+        error: true,
+        errorList: ["unauthorized"],
+        data: null,
+      });
+      return;
+    }
+  } catch (error) {
     res.status(400).send({
       error: true,
       errorList: ["something went wrong"],
